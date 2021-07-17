@@ -7,8 +7,7 @@ import 'package:to_do_app/constants/colors.dart';
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         body: SafeArea(
             child: Padding(
           padding: const EdgeInsets.only(
@@ -158,7 +157,6 @@ class MyApp extends StatelessWidget {
             ],
           ),
         )),
-      ),
     );
   }
 

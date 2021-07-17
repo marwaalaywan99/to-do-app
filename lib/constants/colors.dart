@@ -6,3 +6,8 @@ const kDialogTextStyle = TextStyle(
     fontSize: 18.0,
     fontWeight: FontWeight.bold
 );
+
+const kscreensTitle = TextStyle(
+  fontSize: 60.0,
+  fontWeight: FontWeight.bold
+);
