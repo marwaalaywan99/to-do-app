@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:date_time_format/date_time_format.dart';
 import 'package:to_do_app/components/custom_dialog.dart';
 import 'package:to_do_app/constants/colors.dart';
+import 'package:to_do_app/screens/tasks_screens/tasks_landing.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -65,24 +66,26 @@ class MyApp extends StatelessWidget {
                 height: 15.0,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(onPressed: null, child: Text('Tasks')),
-                    ElevatedButton(onPressed: null, child: Text('Reminders')),
-                    ElevatedButton(onPressed: null, child: Text('Calender')),
-                    ElevatedButton(
-                        onPressed: (){
-                          return showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return CustomDialog(
-                                  listItems: moreScreensListView(),
-                                );
-                              });
-                        }, child: Icon(Icons.more_vert))
-                  ],
+                padding: const EdgeInsets.only(left: 4.0, right: 5.0),
+                child: Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(onPressed: null, child: Text('Tasks')),
+                      ElevatedButton(onPressed: null, child: Text('Reminders')),
+                      ElevatedButton(onPressed: null, child: Text('Calender')),
+                      ElevatedButton(
+                          onPressed: (){
+                            return showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return CustomDialog(
+                                    listItems: moreScreensListView(),
+                                  );
+                                });
+                          }, child: Icon(Icons.more_vert))
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 15.0),
@@ -98,7 +101,13 @@ class MyApp extends StatelessWidget {
                         fontSize: 30,
                       ),
                     ),
-                    Text('View all'),
+                    TextButton(onPressed: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TasksScreen()),
+                      );
+                    }, child: Text('View all')),
+
                   ],
                 ),
               ),
@@ -108,18 +117,16 @@ class MyApp extends StatelessWidget {
                     Card(
                       child: ListTile(
                         title: Text('Work Meeting'),
-                        trailing: IconButton(
-                            icon: Icon(Icons.more_vert),
-                            onPressed: null),
+                        trailing: Icon(Icons.more_vert),
                       ),
-                      color: kMainRed,
+                      //color: kMainRed,
                     ),
                     Card(
                       child: ListTile(
                         title: Text('Doctor Appointment'),
                         trailing: Icon(Icons.more_vert),
                       ),
-                      color: kMainBlue,
+                      //color: kMainBlue,
                     ),
                     Card(
                       child: ListTile(
