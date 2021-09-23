@@ -23,12 +23,12 @@ class _TasksScreenState extends State<TasksScreen> {
             );
           },
           child: const Icon(Icons.add),
-          backgroundColor: Colors.deepPurple,
+          //backgroundColor: Colors.deepPurple,
         ),
       body: SafeArea(
         child: Padding(
         padding: const EdgeInsets.only(
-        left: 15.0, top: 50.0, bottom: 50.0, right: 15.0),
+        top: 50.0, bottom: 50.0, right: 15.0),
           child: Column(
             children: [
               Row(
@@ -43,7 +43,15 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 20.0),
-                    child: CalenderIcon(),
+                    child: IconButton(
+                        icon: Icon(
+                          Icons.calendar_today,
+                          color: Colors.purple[600],
+                          size: 40,),
+                        onPressed: () async{
+                          Calender().showDatePicker(context);
+                        }
+                    ),
                   ),
                 ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/constants/colors.dart';
 
 class ScrollableCalender extends StatefulWidget {
   @override
@@ -43,7 +44,7 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
-                  color: Colors.deepPurple),
+                  color: kMainPurple),
             )),
         SizedBox(height: 10),
         Container(
@@ -71,7 +72,7 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: currentDateSelectedIndex == index
-                            ? Colors.deepPurple
+                            ? kMainPurple
                             : Colors.white),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
