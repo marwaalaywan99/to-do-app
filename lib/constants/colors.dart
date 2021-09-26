@@ -29,3 +29,4 @@ const MaterialColor kMainPurple = const MaterialColor(
       900: Color(0xFF8E24AA),
     }
 );
+

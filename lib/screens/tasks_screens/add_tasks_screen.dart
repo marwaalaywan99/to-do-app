@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import 'package:to_do_app/classes/tasks_class.dart';
 import 'package:to_do_app/components/calender_icon.dart';
 import 'package:to_do_app/constants/colors.dart';
 
@@ -13,12 +15,43 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   final myController = TextEditingController();
   String taskName;
   bool isSwitched = false;
+  DateTime date;
+  TimeOfDay time;
+  final calender = Calender();
+  Tasks task = Tasks();
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
     myController.dispose();
     super.dispose();
+  }
+
+
+  showDatePicker1(context) async{
+    DateTime datetime = await showRoundedDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(DateTime.now().year - 1),
+      lastDate: DateTime(DateTime.now().year + 1),
+      borderRadius: 16,
+      theme: ThemeData(primarySwatch: kMainPurple),
+    );
+    print(date);
+    setState(() {task.taskDate = datetime;});
+  }
+
+  showTimePicker1(context) async{
+    TimeOfDay currentTime = TimeOfDay.now();
+    TimeOfDay time1 = await showTimePicker(
+      context: context,
+      initialTime: currentTime,
+      initialEntryMode: TimePickerEntryMode.input,
+    );
+    print(time);
+    setState(() {
+      task.taskTime = time1;
+    });
   }
 
   @override
@@ -132,8 +165,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
             ),
             onChanged: (string) {
-              taskName = string;
+              task.taskName = string;
               debugPrint(taskName);
+              setState(() {});
             },
           ),
         )
@@ -144,7 +178,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   Widget addDate(context) {
     return GestureDetector(
       onTap: () async {
-        Calender().showDatePicker(context);
+        showDatePicker1(context);
       },
       child: Row(
         children: <Widget>[
@@ -179,7 +213,18 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.black,
-              ))
+              )),
+          new Spacer(),
+          Text(
+            task.taskDate == null ? '' :
+            task.taskDate.day.toString() +
+              '/' +
+              task.taskDate.month.toString() +
+              '/' +
+              task.taskDate.year.toString(),
+          style: TextStyle(
+            fontSize: 20,
+          color: Colors.black54)),
         ],
       ),
     );
@@ -188,7 +233,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   Widget addTime(context) {
     return GestureDetector(
       onTap: () async {
-        Calender().showTimePicker1(context);
+        showTimePicker1(context);
       },
       child: Row(
         children: <Widget>[
@@ -223,7 +268,15 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.black,
-              ))
+              )),
+          new Spacer(),
+          Text(
+            task.taskTime == null ? '' :
+                task.taskTime.format(context),
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black54)
+          )
         ],
       ),
     );
@@ -270,6 +323,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           onChanged: (value) {
             setState(() {
               isSwitched = value;
+              task.taskReminder = isSwitched;
               print(isSwitched);
             });
           },
@@ -283,7 +337,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   Widget addTask(){
     return ElevatedButton(
         onPressed: (){
-
+          print(task.toString());
         },
         child:
     Text('Create Task',

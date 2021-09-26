@@ -49,7 +49,7 @@ class _TasksScreenState extends State<TasksScreen> {
                           color: Colors.purple[600],
                           size: 40,),
                         onPressed: () async{
-                          Calender().showDatePicker(context);
+                          Calender().showDatePicker1(context);
                         }
                     ),
                   ),
