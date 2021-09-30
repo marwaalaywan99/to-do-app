@@ -6,7 +6,8 @@ class Tasks{
   DateTime taskDate;
   TimeOfDay taskTime;
   bool taskReminder;
-  List<Tasks> tasksList = List();
+  bool markedAsDone;
+
 
 
   Tasks({this.taskName, this.taskDate, this.taskTime, this.taskReminder});
@@ -15,5 +16,6 @@ class Tasks{
   String toString(){
     return 'Task{task name: $taskName, task date: $taskDate, task time: $taskTime, task reminder: $taskReminder}';
   }
+
 }
 

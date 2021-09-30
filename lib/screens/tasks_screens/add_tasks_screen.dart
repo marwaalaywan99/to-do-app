@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:to_do_app/classes/tasks_class.dart';
+import 'package:to_do_app/classes/tasks_list_class.dart';
 import 'package:to_do_app/components/calender_icon.dart';
 import 'package:to_do_app/constants/colors.dart';
 
@@ -19,6 +20,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   TimeOfDay time;
   final calender = Calender();
   Tasks task = Tasks();
+  TasksList tasksList = TasksList();
 
   @override
   void dispose() {
@@ -27,21 +29,26 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     super.dispose();
   }
 
-
-  showDatePicker1(context) async{
+  showDatePicker1(context) async {
     DateTime datetime = await showRoundedDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(DateTime.now().year - 1),
-      lastDate: DateTime(DateTime.now().year + 1),
+      firstDate: DateTime(DateTime
+          .now()
+          .year - 1),
+      lastDate: DateTime(DateTime
+          .now()
+          .year + 1),
       borderRadius: 16,
       theme: ThemeData(primarySwatch: kMainPurple),
     );
     print(date);
-    setState(() {task.taskDate = datetime;});
+    setState(() {
+      task.taskDate = datetime;
+    });
   }
 
-  showTimePicker1(context) async{
+  showTimePicker1(context) async {
     TimeOfDay currentTime = TimeOfDay.now();
     TimeOfDay time1 = await showTimePicker(
       context: context,
@@ -59,47 +66,49 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     final focus = FocusNode;
     return Scaffold(
         body: SafeArea(
-      child: SingleChildScrollView(
-          child: Padding(
-        padding: const EdgeInsets.only(
-            left: 15.0, top: 50.0, bottom: 50.0, right: 15.0),
-        child: Column(children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 25.0),
-              child: Row(
-                children: [
-                  Text(
-                    'Add Tasks',
-                    style: kscreensTitle,
+          child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 15.0, top: 50.0, bottom: 50.0, right: 15.0),
+                child: Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Add Tasks',
+                          style: kscreensTitle,
+                        ),
+                        new Spacer(),
+                      ],
+                    ),
                   ),
-                  new Spacer(),
-                ],
-              ),
-            ),
-          SizedBox(height: 20),
-          addTitle(focus),
-          SizedBox(height: 5),
-          addDate(context),
-          SizedBox(height: 20),
-          addTime(context),
-          SizedBox(height: 20),
-          addReminder(),
-          SizedBox(height: 30,),
-          addTask(),
-          // TextField(
-          //   controller: myController,
-          //   decoration: InputDecoration(
-          //     border: OutlineInputBorder(),
-          //     hintText: 'Add task',
-          //   ),
-          // ),
-          SizedBox(
-            height: 20,
-          ),
-          //Text(myController.text),
-        ]),
-      )),
-    ));
+                  SizedBox(height: 20),
+                  addTitle(focus),
+                  SizedBox(height: 5),
+                  addDate(context),
+                  SizedBox(height: 20),
+                  addTime(context),
+                  SizedBox(height: 20),
+                  addReminder(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  addTask(),
+                  // TextField(
+                  //   controller: myController,
+                  //   decoration: InputDecoration(
+                  //     border: OutlineInputBorder(),
+                  //     hintText: 'Add task',
+                  //   ),
+                  // ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  //Text(myController.text),
+                ]),
+              )),
+        ));
   }
 
   Widget addTitle(focus) {
@@ -216,15 +225,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               )),
           new Spacer(),
           Text(
-            task.taskDate == null ? '' :
-            task.taskDate.day.toString() +
-              '/' +
-              task.taskDate.month.toString() +
-              '/' +
-              task.taskDate.year.toString(),
-          style: TextStyle(
-            fontSize: 20,
-          color: Colors.black54)),
+              task.taskDate == null
+                  ? ''
+                  : task.taskDate.day.toString() +
+                  '/' +
+                  task.taskDate.month.toString() +
+                  '/' +
+                  task.taskDate.year.toString(),
+              style: TextStyle(fontSize: 20, color: Colors.black54)),
         ],
       ),
     );
@@ -270,13 +278,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 color: Colors.black,
               )),
           new Spacer(),
-          Text(
-            task.taskTime == null ? '' :
-                task.taskTime.format(context),
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black54)
-          )
+          Text(task.taskTime == null ? '' : task.taskTime.format(context),
+              style: TextStyle(fontSize: 20, color: Colors.black54))
         ],
       ),
     );
@@ -334,21 +337,49 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     );
   }
 
-  Widget addTask(){
+  Widget addTask() {
     return ElevatedButton(
-        onPressed: (){
-          print(task.toString());
-        },
-        child:
-    Text('Create Task',
-    style: TextStyle(
-      fontSize: 20,
-    ),),
-    style: ElevatedButton.styleFrom(
-      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(30)),
+      onPressed: () {
+        return successDialog();
+      },
+      child: Text(
+        'Create Task',
+        style: TextStyle(
+          fontSize: 20,
+        ),
       ),
-    ),);
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30)),
+        ),
+      ),
+    );
+  }
+
+  Future<Widget> successDialog() {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Success"),
+            titleTextStyle:
+            TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black, fontSize: 20),
+            actionsOverflowButtonSpacing: 20,
+            actions: [
+              ElevatedButton(
+                  onPressed: () {
+                    tasksList.addTask(task);
+                    print(tasksList);
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Done")),
+            ],
+            content: Text("Task added successfully !"),
+          );
+        });
   }
 }
