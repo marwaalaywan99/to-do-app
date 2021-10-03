@@ -10,7 +10,7 @@ class Tasks{
 
 
 
-  Tasks({this.taskName, this.taskDate, this.taskTime, this.taskReminder});
+  Tasks({this.taskName, this.taskDate, this.taskTime, this.taskReminder, this.markedAsDone = false});
 
   @override
   String toString(){

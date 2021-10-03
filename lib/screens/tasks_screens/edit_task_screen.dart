@@ -8,19 +8,23 @@ import 'package:to_do_app/components/calender_icon.dart';
 import 'package:to_do_app/constants/colors.dart';
 import 'package:to_do_app/models/tasks_data.dart';
 
-class AddTaskScreen extends StatefulWidget {
+class EditTaskScreen extends StatefulWidget {
+  final Tasks task;
+
+  const EditTaskScreen({Key key, @required this.task}) : super(key: key);
   @override
-  _AddTaskScreenState createState() => _AddTaskScreenState();
+  _EditTaskScreenState createState() => _EditTaskScreenState();
 }
 
-class _AddTaskScreenState extends State<AddTaskScreen> {
+class _EditTaskScreenState extends State<EditTaskScreen> {
   final myController = TextEditingController();
   String taskName;
   bool isSwitched = false;
   DateTime date;
   TimeOfDay time;
   final calender = Calender();
-  Tasks task = Tasks();
+  Tasks newTask = Tasks();
+  
 
   @override
   void dispose() {
@@ -44,7 +48,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     );
     print(date);
     setState(() {
-      task.taskDate = datetime;
+      newTask.taskDate = datetime;
     });
   }
 
@@ -57,7 +61,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     );
     print(time);
     setState(() {
-      task.taskTime = time1;
+      widget.task.taskTime = time1;
     });
   }
 
@@ -157,10 +161,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           // ),
           child: TextFormField(
             cursorColor: Colors.purple[600],
-            maxLength: 10,
+            maxLength: 20,
             decoration: InputDecoration(
-              hintText: 'Enter Task Name',
+              hintText: widget.task.taskName,
               labelText: 'Task Name',
+              floatingLabelBehavior: FloatingLabelBehavior.always,
               labelStyle: TextStyle(
                 fontSize: 20,
                 color: Colors.black,
@@ -173,7 +178,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
             ),
             onChanged: (string) {
-              task.taskName = string;
+              newTask.taskName = string;
               debugPrint(taskName);
               setState(() {});
             },
@@ -224,13 +229,17 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               )),
           new Spacer(),
           Text(
-              task.taskDate == null
-                  ? ''
-                  : task.taskDate.day.toString() +
-                  '/' +
-                  task.taskDate.month.toString() +
-                  '/' +
-                  task.taskDate.year.toString(),
+              newTask.taskDate == null
+                  ? widget.task.taskDate.day.toString() +
+                    '/' +
+                    widget.task.taskDate.month.toString() +
+                    '/' +
+                    widget.task.taskDate.year.toString()
+                  : newTask.taskDate.day.toString() +
+                    '/' +
+                    newTask.taskDate.month.toString() +
+                    '/' +
+                    newTask.taskDate.year.toString(),
               style: TextStyle(fontSize: 20, color: Colors.black54)),
         ],
       ),
@@ -277,7 +286,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 color: Colors.black,
               )),
           new Spacer(),
-          Text(task.taskTime == null ? '' : task.taskTime.format(context),
+          Text(newTask.taskTime == null
+              ? widget.task.taskTime.format(context)
+              : newTask.taskTime.format(context),
               style: TextStyle(fontSize: 20, color: Colors.black54))
         ],
       ),
@@ -321,11 +332,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             )),
         new Spacer(),
         Switch(
-          value: isSwitched,
+          value: widget.task.taskReminder,
           onChanged: (value) {
             setState(() {
               isSwitched = value;
-              task.taskReminder = isSwitched;
+              newTask.taskReminder = isSwitched;
               print(isSwitched);
             });
           },
@@ -342,7 +353,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         return successDialog();
       },
       child: Text(
-        'Create Task',
+        'Edit Task',
         style: TextStyle(
           fontSize: 20,
         ),
@@ -371,12 +382,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             actions: [
               ElevatedButton(
                   onPressed: () {
-                    Provider.of<TasksModel>(context, listen:false).addTask(task);
+                    Provider.of<TasksModel>(context, listen:false).editTask(widget.task, newTask);
                     Navigator.pushNamed(context, '/tasks screen');
                   },
                   child: Text("Done")),
             ],
-            content: Text("Task added successfully !"),
+            content: Text("Task updated successfully !"),
           );
         });
   }

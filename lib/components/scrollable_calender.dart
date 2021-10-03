@@ -1,3 +1,4 @@
+import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/constants/colors.dart';
 
@@ -29,18 +30,14 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
 
   @override
   Widget build(BuildContext context) {
+    String date = DateTimeFormat.format(selectedDate, format: AmericanDateFormats.dayOfWeek);
     return Column(
       children: [
         Container(
             height: 30,
             margin: EdgeInsets.only(left: 10),
             alignment: Alignment.centerLeft,
-            child: Text(
-              selectedDate.day.toString() +
-                  '-' +
-                  listOfMonths[selectedDate.month - 1] +
-                  ', ' +
-                  selectedDate.year.toString(),
+            child: Text(date,
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
