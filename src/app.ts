@@ -18,6 +18,6 @@ mongoose.connect(
 );
 
 app.use("/", router);
-app.listen(process.env.PORT || 8080, () => {
-  console.log("Server is rocking at 8080");
+app.listen(process.env.PORT || 1900, () => {
+  console.log("Server is rocking at 1900");
 });

@@ -9,17 +9,20 @@ class TasksList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<TasksModel>(
-      builder: (context, taskData, child) {
+      builder: (context, taskData, child) => FutureBuilder(
+        future: taskData.fetchData(),
+        builder: (context, snapshot) {
         return ListView.builder(
           itemBuilder: (context, index) {
-            final task = taskData.tasks[index];
+            final task = taskData.tasksData[index];
             return TaskTile(
               task
             );
           },
-          itemCount: taskData.taskCount,
+          itemCount: 2,
         );
       },
+    )
     );
   }
 }

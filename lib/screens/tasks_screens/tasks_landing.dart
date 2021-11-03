@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/classes/tasks_list_class.dart';
 import 'package:to_do_app/components/calender_icon.dart';
 import 'package:to_do_app/components/scrollable_calender.dart';
 import 'package:to_do_app/constants/colors.dart';
+import 'package:to_do_app/models/tasks_data.dart';
 import 'package:to_do_app/screens/tasks_screens/add_tasks_screen.dart';
 import 'package:to_do_app/widgets/tasks_list.dart';
 
@@ -13,6 +15,13 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
+
+  @override
+  void initState() {
+    Provider.of<TasksModel>(context, listen: false).fetchData();
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
