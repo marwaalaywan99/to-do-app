@@ -6,8 +6,11 @@ import 'package:to_do_app/classes/tasks_class.dart';
 
 class TasksModel extends ChangeNotifier{
 
+  List<Tasks> _tasksBasedonDates;
   List<Tasks> _tasks = [
-    Tasks(taskName: 'Work Meeting', taskDate: DateTime.now(), taskTime: TimeOfDay.now(), taskReminder: false, markedAsDone: false),
+    Tasks(taskName: 'Work Meeting', taskDate: DateTime(2022), taskTime: TimeOfDay.now(), taskReminder: false, markedAsDone: false),
+    Tasks(taskName: 'Doctor Appointment', taskDate: DateTime.now(), taskTime: TimeOfDay.now(), taskReminder: true, markedAsDone: true),
+    Tasks(taskName: 'Doctor Appointment', taskDate: DateTime.now(), taskTime: TimeOfDay.now(), taskReminder: true, markedAsDone: true),
     Tasks(taskName: 'Doctor Appointment', taskDate: DateTime.now(), taskTime: TimeOfDay.now(), taskReminder: true, markedAsDone: true),
   ];
 
@@ -16,6 +19,8 @@ class TasksModel extends ChangeNotifier{
   int get taskCount{
     return _tasks.length;
   }
+
+  //void tasksBasedonDates()
 
   void addTask(Tasks task){
     _tasks.add(task);

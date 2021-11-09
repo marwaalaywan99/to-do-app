@@ -12,14 +12,23 @@ class TasksList extends StatelessWidget {
       builder: (context, taskData, child) {
         return ListView.builder(
           itemBuilder: (context, index) {
-            final task = taskData.tasks[index];
-            return TaskTile(
-              task
-            );
+            final now = DateTime.now();
+            final time = taskData.tasks[index].taskDate;
+            if(now.year == time.year && now.month == time.month && now.day == time.day){
+              final task = taskData.tasks[index];
+              return TaskTile(
+                  task
+              );
+            }
+            else{
+              return Text('No Tasks for today');
+            }
           },
           itemCount: taskData.taskCount,
         );
       },
     );
   }
+
+
 }

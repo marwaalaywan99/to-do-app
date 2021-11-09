@@ -42,6 +42,7 @@ class TaskTile extends StatelessWidget{
           SimpleDialogOption(
             child: const Text('Edit', style: kDialogTextStyle),
             onPressed: () {
+              Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(
