@@ -372,6 +372,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ElevatedButton(
                   onPressed: () {
                     Provider.of<TasksModel>(context, listen:false).addTask(task);
+                    Navigator.pop(context);
                     Navigator.pushNamed(context, '/tasks screen');
                   },
                   child: Text("Done")),

@@ -383,6 +383,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
               ElevatedButton(
                   onPressed: () {
                     Provider.of<TasksModel>(context, listen:false).editTask(widget.task, newTask);
+                    Navigator.pop(context);
                     Navigator.pushNamed(context, '/tasks screen');
                   },
                   child: Text("Done")),
