@@ -109,7 +109,7 @@ class MyApp extends StatelessWidget {
                     ],
                   ),
                 ),
-                Expanded(child: TasksList()),
+                Expanded(child: TasksList(date: DateTime.now(),)),
               ],
             ),
           ),

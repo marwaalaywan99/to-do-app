@@ -1,14 +1,20 @@
 import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/constants/colors.dart';
+import 'package:to_do_app/models/tasks_data.dart';
 
 class ScrollableCalender extends StatefulWidget {
+
+  DateTime selectedDate = DateTime.now();
+  ScrollableCalender({this.selectedDate});
+
   @override
   _ScrollableContainerState createState() => _ScrollableContainerState();
 }
 
 class _ScrollableContainerState extends State<ScrollableCalender> {
-  DateTime selectedDate = DateTime.now();
+
   int currentDateSelectedIndex = 0;
   ScrollController scrollController = ScrollController();
   List<String> listOfMonths = [
@@ -30,7 +36,7 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
 
   @override
   Widget build(BuildContext context) {
-    String date = DateTimeFormat.format(selectedDate, format: AmericanDateFormats.dayOfWeek);
+    String date = DateTimeFormat.format(widget.selectedDate, format: AmericanDateFormats.dayOfWeek);
     return Column(
       children: [
         Container(
@@ -59,8 +65,9 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
                   onTap: () {
                     setState(() {
                       currentDateSelectedIndex = index;
-                      selectedDate = DateTime.now().add(Duration(days: index));
+                      widget.selectedDate = DateTime.now().add(Duration(days: index));
                     });
+                    Provider.of<TasksModel>(context, listen:false).changeDate(widget.selectedDate, context);
                   },
                   child: Container(
                     height: 80,
@@ -76,7 +83,7 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
                       children: [
                         Text(
                           listOfMonths[
-                                  DateTime.now().add(Duration(days: index)).month -
+                                  widget.selectedDate.add(Duration(days: index)).month -
                                       1]
                               .toString(),
                           style: TextStyle(
@@ -89,7 +96,7 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
                           height: 5,
                         ),
                         Text(
-                          DateTime.now().add(Duration(days: index)).day.toString(),
+                          widget.selectedDate.add(Duration(days: index)).day.toString(),
                           style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w700,

@@ -3,10 +3,10 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:to_do_app/classes/tasks_class.dart';
+import 'package:to_do_app/components/calender_icon.dart';
 
 class TasksModel extends ChangeNotifier{
 
-  List<Tasks> _tasksBasedonDates;
   List<Tasks> _tasks = [
     Tasks(taskName: 'Work Meeting', taskDate: DateTime(2022), taskTime: TimeOfDay.now(), taskReminder: false, markedAsDone: false),
     Tasks(taskName: 'Doctor Appointment', taskDate: DateTime.now(), taskTime: TimeOfDay.now(), taskReminder: true, markedAsDone: true),
@@ -14,13 +14,16 @@ class TasksModel extends ChangeNotifier{
     Tasks(taskName: 'Doctor Appointment', taskDate: DateTime.now(), taskTime: TimeOfDay.now(), taskReminder: true, markedAsDone: true),
   ];
 
+  Calender cal = Calender();
+  DateTime date;
+
   UnmodifiableListView<Tasks> get tasks => UnmodifiableListView(_tasks);
+
 
   int get taskCount{
     return _tasks.length;
   }
 
-  //void tasksBasedonDates()
 
   void addTask(Tasks task){
     _tasks.add(task);
@@ -40,6 +43,12 @@ class TasksModel extends ChangeNotifier{
 
   void markAsDone(Tasks task){
     task.markedAsDone = true;
+    notifyListeners();
+  }
+
+  void changeDate(DateTime selectedDate, BuildContext context){
+    date = selectedDate;
+    print('CAL $date');
     notifyListeners();
   }
 }

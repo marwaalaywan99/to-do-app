@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/constants/colors.dart';
+import 'package:to_do_app/models/tasks_data.dart';
 
 class Calender extends StatelessWidget{
   DateTime selectedDate;
   TimeOfDay selectedTime;
 
-  void setDate(DateTime date){
+  Calender({this.selectedDate, this.selectedTime});
+
+  void setDate(DateTime date, BuildContext context){
     selectedDate = date;
+    //Provider.of<TasksModel>(context, listen:false).changeDate(context);
   }
 
   void setTime(TimeOfDay time){
@@ -41,18 +46,21 @@ class Calender extends StatelessWidget{
   //         size: 40,));
   // }
 
-  showDatePicker1(context) async{
-  DateTime date = await showRoundedDatePicker(
-    context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime(DateTime.now().year - 1),
-    lastDate: DateTime(DateTime.now().year + 1),
-    borderRadius: 16,
-    theme: ThemeData(primarySwatch: kMainPurple),
-  );
-  setDate(date);
-  print(date);
-}
+//   Future<DateTime> showDatePicker1(BuildContext  context) async{
+//     final DateTime date = await showRoundedDatePicker(
+//       context: context,
+//       initialDate: DateTime.now(),
+//       firstDate: DateTime(DateTime.now().year - 1),
+//       lastDate: DateTime(DateTime.now().year + 1),
+//       borderRadius: 16,
+//       theme: ThemeData(primarySwatch: kMainPurple),
+//   );
+//
+//   // setDate(date, context);
+//   print(date);
+//   return date;
+//
+// }
 
 showTimePicker1(context) async{
   TimeOfDay currentTime = TimeOfDay.now();
@@ -70,5 +78,6 @@ showTimePicker1(context) async{
     // TODO: implement build
     throw UnimplementedError();
   }
+
 }
 
