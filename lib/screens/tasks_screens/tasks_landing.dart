@@ -17,6 +17,7 @@ class TasksScreen extends StatefulWidget {
 
 class _TasksScreenState extends State<TasksScreen> {
   DateTime selectedDate = DateTime.now();
+  bool calSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class _TasksScreenState extends State<TasksScreen> {
         setState(() {
           selectedDate = DateTime.now();
         });
-        Provider.of<TasksModel>(context, listen:false).changeDate(selectedDate, context);
+        Provider.of<TasksModel>(context, listen:false).changeDate(selectedDate, false, context);
         return false;
       },
       child: Scaffold(
@@ -73,7 +74,7 @@ class _TasksScreenState extends State<TasksScreen> {
                       ),
 
                       //To show Calendar Widget
-                      ScrollableCalender(selectedDate: selectedDate,),
+                      ScrollableCalender(selectedDate: selectedDate, calDateSelected: calSelected,),
                       SizedBox(
                         height: 20,
                       ),
@@ -98,9 +99,9 @@ class _TasksScreenState extends State<TasksScreen> {
     if (date != null && date != selectedDate)
       setState(() {
         selectedDate = date;
-        ScrollableCalender().selectedDate = date;
+        calSelected = true;
       });
     print(date);
-    Provider.of<TasksModel>(context, listen:false).changeDate(selectedDate, context);
+    Provider.of<TasksModel>(context, listen:false).changeDate(selectedDate, true, context);
   }
 }

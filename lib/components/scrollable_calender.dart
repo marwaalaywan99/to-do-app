@@ -5,16 +5,16 @@ import 'package:to_do_app/constants/colors.dart';
 import 'package:to_do_app/models/tasks_data.dart';
 
 class ScrollableCalender extends StatefulWidget {
-
   DateTime selectedDate = DateTime.now();
-  ScrollableCalender({this.selectedDate});
+  bool calDateSelected = false;
+
+  ScrollableCalender({this.selectedDate, this.calDateSelected});
 
   @override
   _ScrollableContainerState createState() => _ScrollableContainerState();
 }
 
 class _ScrollableContainerState extends State<ScrollableCalender> {
-
   int currentDateSelectedIndex = 0;
   ScrollController scrollController = ScrollController();
   List<String> listOfMonths = [
@@ -34,16 +34,19 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
 
   List<String> listOfDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
+
   @override
   Widget build(BuildContext context) {
-    String date = DateTimeFormat.format(widget.selectedDate, format: AmericanDateFormats.dayOfWeek);
+    String date = DateTimeFormat.format(widget.selectedDate,
+        format: AmericanDateFormats.dayOfWeek);
     return Column(
       children: [
         Container(
             height: 30,
             margin: EdgeInsets.only(left: 10),
             alignment: Alignment.centerLeft,
-            child: Text(date,
+            child: Text(
+              date,
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
@@ -65,9 +68,20 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
                   onTap: () {
                     setState(() {
                       currentDateSelectedIndex = index;
-                      widget.selectedDate = DateTime.now().add(Duration(days: index));
+                      widget.selectedDate =
+                          DateTime.now().add(Duration(days: index));
+                      print('date ${widget.selectedDate}');
+                      print('${DateTime
+                          .now()
+                          .add(Duration(days: index))
+                          .day}');
+                      print('${DateTime
+                          .now()
+                          .add(Duration(days: index))
+                          .month}');
                     });
-                    Provider.of<TasksModel>(context, listen:false).changeDate(widget.selectedDate, context);
+                    Provider.of<TasksModel>(context, listen: false)
+                        .changeDate(widget.selectedDate, false, context);
                   },
                   child: Container(
                     height: 80,
@@ -75,34 +89,32 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        color: currentDateSelectedIndex == index
-                            ? kPurpleShade1
-                            : Colors.white),
+                        color: calDateSelectedCardColor(widget.calDateSelected, index)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          listOfMonths[
-                                  widget.selectedDate.add(Duration(days: index)).month -
-                                      1]
+                          listOfMonths[DateTime.now()
+                                      .add(Duration(days: index))
+                                      .month -
+                                  1]
                               .toString(),
                           style: TextStyle(
                               fontSize: 16,
-                              color: currentDateSelectedIndex == index
-                                  ? Colors.white
-                                  : Colors.grey),
+                              color: calDateSelectedTextColor(widget.calDateSelected, index)),
                         ),
                         SizedBox(
                           height: 5,
                         ),
                         Text(
-                          widget.selectedDate.add(Duration(days: index)).day.toString(),
+                          DateTime.now()
+                              .add(Duration(days: index))
+                              .day
+                              .toString(),
                           style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w700,
-                              color: currentDateSelectedIndex == index
-                                  ? Colors.white
-                                  : Colors.grey),
+                              color: calDateSelectedTextColor(widget.calDateSelected, index)),
                         ),
                         SizedBox(
                           height: 5,
@@ -115,9 +127,7 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
                               .toString(),
                           style: TextStyle(
                               fontSize: 16,
-                              color: currentDateSelectedIndex == index
-                                  ? Colors.white
-                                  : Colors.grey),
+                              color: calDateSelectedTextColor(widget.calDateSelected, index)),
                         ),
                       ],
                     ),
@@ -127,5 +137,49 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
             ))),
       ],
     );
+  }
+
+  Color calDateSelectedCardColor(bool calDate, int index){
+    if(calDate) {
+      if ((widget.selectedDate.month == DateTime
+          .now()
+          .add(Duration(days: index))
+          .month)
+          && (widget.selectedDate.day == DateTime
+              .now()
+              .add(Duration(days: index))
+              .day )) {
+        return kPurpleShade1;
+      }
+      else{
+        return Colors.white;
+      }
+    }
+    else{
+      if(currentDateSelectedIndex == index) return kPurpleShade1;
+      else return Colors.white;
+    }
+  }
+
+  Color calDateSelectedTextColor(bool calDate, int index){
+    if(calDate) {
+      if ((widget.selectedDate.month == DateTime
+          .now()
+          .add(Duration(days: index))
+          .month)
+          && (widget.selectedDate.day == DateTime
+              .now()
+              .add(Duration(days: index))
+              .day )) {
+        return Colors.white;
+      }
+      else{
+        return Colors.grey;
+      }
+    }
+    else{
+      if(currentDateSelectedIndex == index) return Colors.white;
+      else return Colors.grey;
+    }
   }
 }

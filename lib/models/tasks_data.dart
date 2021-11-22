@@ -16,6 +16,7 @@ class TasksModel extends ChangeNotifier{
 
   Calender cal = Calender();
   DateTime date;
+  bool calDateSelected = false;
 
   UnmodifiableListView<Tasks> get tasks => UnmodifiableListView(_tasks);
 
@@ -46,8 +47,9 @@ class TasksModel extends ChangeNotifier{
     notifyListeners();
   }
 
-  void changeDate(DateTime selectedDate, BuildContext context){
+  void changeDate(DateTime selectedDate, bool calSelected, BuildContext context){
     date = selectedDate;
+    calDateSelected = calSelected;
     print('CAL $date');
     notifyListeners();
   }
