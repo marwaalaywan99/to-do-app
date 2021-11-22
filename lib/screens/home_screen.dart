@@ -1,12 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:date_time_format/date_time_format.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:to_do_app/components/custom_dialog.dart';
 import 'package:to_do_app/constants/colors.dart';
 import 'package:to_do_app/screens/tasks_screens/tasks_landing.dart';
 import 'package:to_do_app/widgets/tasks_list.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +60,7 @@ class MyApp extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 30.0,
                         fontWeight: FontWeight.bold,
+                        color: kPurpleShade3
                       ),
                     ),
                   ],
@@ -61,7 +71,12 @@ class MyApp extends StatelessWidget {
                 Row(
                   children: [
                     SizedBox(width: 15.0),
-                    Text('${currentDate()}'),
+                    Text('${currentDate()}',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: kGrey
+                      ),),
                   ],
                 ),
                 SizedBox(
@@ -70,24 +85,36 @@ class MyApp extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 4.0, right: 5.0),
                   child: Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ElevatedButton(onPressed: null, child: Text('Tasks')),
-                        ElevatedButton(onPressed: null, child: Text('Reminders')),
-                        ElevatedButton(onPressed: null, child: Text('Calender')),
-                        ElevatedButton(
-                            onPressed: (){
-                              return showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return CustomDialog(
-                                      listItems: moreScreensListView(),
-                                    );
-                                  });
-                            }, child: Icon(Icons.more_vert))
+                    child: SalomonBottomBar(
+                      currentIndex: _currentIndex,
+                      onTap: (i) {
+                        setState(() => _currentIndex = i);
+                      },
+                      items: [
+                        SalomonBottomBarItem(icon: Icon(Icons.list), title: Text("Tasks", style: TextStyle(color: kPurpleShade11),), selectedColor: kPurpleShade2, unselectedColor: Colors.black54),
+                        SalomonBottomBarItem(icon: Icon(Icons.timer), title: Text("Reminders", style: TextStyle(color: kBlueShade1Text),), selectedColor: kBlueShade1, unselectedColor: Colors.black54),
+                        SalomonBottomBarItem(icon: Icon(Icons.calendar_today_outlined), title: Text("Calender", style: TextStyle(color: kOrangeShade1Text),), selectedColor: kOrangeShade1, unselectedColor: Colors.black54),
+                        SalomonBottomBarItem(icon: Icon(Icons.more_horiz), title: Text("More", style: TextStyle(color: kPurpleShade3),), selectedColor: kPurpleShade3, unselectedColor: Colors.black54)
                       ],
                     ),
+                    // child: Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //   children: [
+                    //     ElevatedButton(onPressed: null, child: Text('Tasks')),
+                    //     ElevatedButton(onPressed: null, child: Text('Reminders')),
+                    //     ElevatedButton(onPressed: null, child: Text('Calender')),
+                    //     ElevatedButton(
+                    //         onPressed: (){
+                    //           return showDialog(
+                    //               context: context,
+                    //               builder: (BuildContext context) {
+                    //                 return CustomDialog(
+                    //                   listItems: moreScreensListView(),
+                    //                 );
+                    //               });
+                    //         }, child: Icon(Icons.more_vert))
+                    //   ],
+                    // ),
                   ),
                 ),
                 SizedBox(height: 15.0),
@@ -101,11 +128,12 @@ class MyApp extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
+                          color: kPurpleShade3
                         ),
                       ),
                       TextButton(onPressed: (){
                         Navigator.pushNamed(context, '/tasks screen');
-                      }, child: Text('View all')),
+                      }, child: Text('View all', style: TextStyle(color: kPurpleShade1),)),
                     ],
                   ),
                 ),
@@ -171,5 +199,4 @@ class MyApp extends StatelessWidget {
       )
     ]);
   }
-
 }

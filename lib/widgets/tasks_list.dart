@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/components/calender_icon.dart';
+import 'package:to_do_app/constants/colors.dart';
 import 'package:to_do_app/models/tasks_data.dart';
 import 'package:to_do_app/widgets/tasks_tile.dart';
 
@@ -17,6 +18,7 @@ class TasksList extends StatelessWidget {
         return ListView.builder(
           itemBuilder: (context, index) {
             DateTime now;
+            Color colorTask = colors[index%3];
             if(taskData.date == null && date == null){
               now = DateTime.now();
             }
@@ -33,7 +35,8 @@ class TasksList extends StatelessWidget {
             if(now.year == time.year && now.month == time.month && now.day == time.day){
               final task = taskData.tasks[index];
               return TaskTile(
-                  task
+                  task,
+                  colorTask
               );
             }
             else{

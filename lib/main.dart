@@ -18,7 +18,7 @@ void main() {
         supportedLocales: [
           const Locale('en', 'US'), // English
         ],
-        theme: ThemeData(fontFamily: "Varela", primarySwatch: kMainPurple),
+        theme: ThemeData(fontFamily: "Varela", primarySwatch: kPurpleShade1),
         initialRoute: '/',
         routes: {
           '/': (context) => MyApp(),

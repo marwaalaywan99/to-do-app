@@ -10,14 +10,17 @@ import 'package:to_do_app/screens/tasks_screens/edit_task_screen.dart';
 class TaskTile extends StatelessWidget{
   
   final Tasks task;
+  final Color colorTask;
 
-  TaskTile(this.task);
+  TaskTile(this.task, this.colorTask);
 
   Widget build(BuildContext context) {
     return Card(
+      color: colorTask,
       child: ListTile(
         title: Text(task.taskName,
           style: TextStyle(
+            color: kTaskTitleColor,
               decoration: task.markedAsDone ? TextDecoration.lineThrough : null),),
         trailing: IconButton(
             icon: Icon(Icons.more_vert),

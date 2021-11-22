@@ -59,7 +59,7 @@ class _TasksScreenState extends State<TasksScreen> {
                             child: IconButton(
                                 icon: Icon(
                                   Icons.calendar_today,
-                                  color: Colors.purple[600],
+                                  color: kPurpleShade1,
                                   size: 40,
                                 ),
                                 onPressed: () async {
@@ -92,7 +92,7 @@ class _TasksScreenState extends State<TasksScreen> {
       firstDate: DateTime(DateTime.now().year - 1),
       lastDate: DateTime(DateTime.now().year + 1),
       borderRadius: 16,
-      theme: ThemeData(primarySwatch: kMainPurple),
+      theme: ThemeData(primarySwatch: kPurpleShade1),
     );
 
     if (date != null && date != selectedDate)

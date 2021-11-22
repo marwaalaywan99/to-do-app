@@ -40,7 +40,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           .now()
           .year + 1),
       borderRadius: 16,
-      theme: ThemeData(primarySwatch: kMainPurple),
+      theme: ThemeData(primarySwatch: kPurpleShade1),
     );
     print(date);
     setState(() {
@@ -118,12 +118,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           child: Material(
             elevation: 10,
             shape: CircleBorder(),
-            shadowColor: Colors.purple[600].withOpacity(0.5),
+            shadowColor: kPurpleShade1.withOpacity(0.5),
             child: Container(
               height: 50,
               width: 50,
               decoration: BoxDecoration(
-                color: Colors.purple[600],
+                color: kPurpleShade1,
                 shape: BoxShape.circle,
               ),
               child: ClipRRect(
@@ -156,7 +156,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           //   ),
           // ),
           child: TextFormField(
-            cursorColor: Colors.purple[600],
+            cursorColor: kPurpleShade1,
             maxLength: 10,
             decoration: InputDecoration(
               hintText: 'Enter Task Name',
@@ -166,10 +166,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 color: Colors.black,
               ),
               enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.purple[600]),
+                borderSide: BorderSide(color: kPurpleShade1),
               ),
               focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.purple[600]),
+                borderSide: BorderSide(color: kPurpleShade1),
               ),
             ),
             onChanged: (string) {
@@ -195,12 +195,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             child: Material(
               elevation: 10,
               shape: CircleBorder(),
-              shadowColor: Colors.purple[600].withOpacity(0.5),
+              shadowColor: kPurpleShade1.withOpacity(0.5),
               child: Container(
                 height: 50,
                 width: 50,
                 decoration: BoxDecoration(
-                  color: Colors.purple[600],
+                  color: kPurpleShade1,
                   shape: BoxShape.circle,
                 ),
                 child: ClipRRect(
@@ -249,12 +249,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             child: Material(
               elevation: 10,
               shape: CircleBorder(),
-              shadowColor: Colors.purple[600].withOpacity(0.5),
+              shadowColor: kPurpleShade1.withOpacity(0.5),
               child: Container(
                 height: 50,
                 width: 50,
                 decoration: BoxDecoration(
-                  color: Colors.purple[600],
+                  color: kPurpleShade1,
                   shape: BoxShape.circle,
                 ),
                 child: ClipRRect(
@@ -292,12 +292,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           child: Material(
             elevation: 10,
             shape: CircleBorder(),
-            shadowColor: Colors.purple[600].withOpacity(0.5),
+            shadowColor: kPurpleShade1.withOpacity(0.5),
             child: Container(
               height: 50,
               width: 50,
               decoration: BoxDecoration(
-                color: Colors.purple[600],
+                color: kPurpleShade1,
                 shape: BoxShape.circle,
               ),
               child: ClipRRect(
@@ -329,8 +329,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               print(isSwitched);
             });
           },
-          activeTrackColor: Colors.purple[300],
-          activeColor: kMainPurple,
+          activeTrackColor: kPurpleShade2Text,
+          activeColor: kPurpleShade1,
         ),
       ],
     );

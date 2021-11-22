@@ -47,7 +47,7 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
-                  color: kMainPurple),
+                  color: kPurpleShade3),
             )),
         SizedBox(height: 10),
         Container(
@@ -76,7 +76,7 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: currentDateSelectedIndex == index
-                            ? kMainPurple
+                            ? kPurpleShade1
                             : Colors.white),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

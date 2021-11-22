@@ -44,7 +44,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
           .now()
           .year + 1),
       borderRadius: 16,
-      theme: ThemeData(primarySwatch: kMainPurple),
+      theme: ThemeData(primarySwatch: kPurpleShade1),
     );
     print(date);
     setState(() {
@@ -341,7 +341,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
             });
           },
           activeTrackColor: Colors.purple[300],
-          activeColor: kMainPurple,
+          activeColor: kPurpleShade1,
         ),
       ],
     );
