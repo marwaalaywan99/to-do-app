@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "881961285304",
+    "project_id": "to-do-app-ea738",
+    "storage_bucket": "to-do-app-ea738.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881961285304:android:54c5babde3b48150aa264d",
+        "android_client_info": {
+          "package_name": "com.marwaalaywan.to_do_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881961285304-aka0gi018262qkfsal0ihr9tgjr1vlb5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBflj9deZciN85zC957r5kpOjRyCmc47AQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881961285304-aka0gi018262qkfsal0ihr9tgjr1vlb5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
