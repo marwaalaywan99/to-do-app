@@ -2,7 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:to_do_app/classes/tasks_class.dart';
+import 'package:to_do_app/data/tasks_class.dart';
 import 'package:to_do_app/components/calender_icon.dart';
 
 class TasksModel extends ChangeNotifier{

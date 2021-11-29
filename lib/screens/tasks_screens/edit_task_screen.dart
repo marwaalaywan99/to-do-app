@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/classes/tasks_class.dart';
+import 'package:to_do_app/data/tasks_class.dart';
 import 'package:to_do_app/components/calender_icon.dart';
 import 'package:to_do_app/constants/colors.dart';
 import 'package:to_do_app/models/tasks_data.dart';
@@ -122,12 +122,12 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
           child: Material(
             elevation: 10,
             shape: CircleBorder(),
-            shadowColor: Colors.purple[600].withOpacity(0.5),
+            shadowColor: kPurpleShade1.withOpacity(0.5),
             child: Container(
               height: 50,
               width: 50,
               decoration: BoxDecoration(
-                color: Colors.purple[600],
+                color: kPurpleShade1,
                 shape: BoxShape.circle,
               ),
               child: ClipRRect(
@@ -160,7 +160,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
           //   ),
           // ),
           child: TextFormField(
-            cursorColor: Colors.purple[600],
+            cursorColor: kPurpleShade1,
             maxLength: 20,
             decoration: InputDecoration(
               hintText: widget.task.taskName,
@@ -171,10 +171,10 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                 color: Colors.black,
               ),
               enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.purple[600]),
+                borderSide: BorderSide(color: kPurpleShade1),
               ),
               focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.purple[600]),
+                borderSide: BorderSide(color: kPurpleShade1),
               ),
             ),
             onChanged: (string) {
@@ -200,12 +200,12 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
             child: Material(
               elevation: 10,
               shape: CircleBorder(),
-              shadowColor: Colors.purple[600].withOpacity(0.5),
+              shadowColor: kPurpleShade1.withOpacity(0.5),
               child: Container(
                 height: 50,
                 width: 50,
                 decoration: BoxDecoration(
-                  color: Colors.purple[600],
+                  color: kPurpleShade1,
                   shape: BoxShape.circle,
                 ),
                 child: ClipRRect(
@@ -258,12 +258,12 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
             child: Material(
               elevation: 10,
               shape: CircleBorder(),
-              shadowColor: Colors.purple[600].withOpacity(0.5),
+              shadowColor: kPurpleShade1.withOpacity(0.5),
               child: Container(
                 height: 50,
                 width: 50,
                 decoration: BoxDecoration(
-                  color: Colors.purple[600],
+                  color: kPurpleShade1,
                   shape: BoxShape.circle,
                 ),
                 child: ClipRRect(
@@ -303,12 +303,12 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
           child: Material(
             elevation: 10,
             shape: CircleBorder(),
-            shadowColor: Colors.purple[600].withOpacity(0.5),
+            shadowColor: kPurpleShade1.withOpacity(0.5),
             child: Container(
               height: 50,
               width: 50,
               decoration: BoxDecoration(
-                color: Colors.purple[600],
+                color: kPurpleShade1,
                 shape: BoxShape.circle,
               ),
               child: ClipRRect(
@@ -340,7 +340,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
               print(isSwitched);
             });
           },
-          activeTrackColor: Colors.purple[300],
+          activeTrackColor: kPurpleShade2Text,
           activeColor: kPurpleShade1,
         ),
       ],

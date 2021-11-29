@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_app/classes/tasks_class.dart';
+import 'package:to_do_app/data/tasks_class.dart';
 
 class TasksListt{
 

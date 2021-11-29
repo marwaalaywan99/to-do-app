@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/classes/tasks_class.dart';
+import 'package:to_do_app/data/tasks_class.dart';
 import 'package:to_do_app/components/custom_dialog.dart';
 import 'package:to_do_app/constants/colors.dart';
 import 'package:to_do_app/models/tasks_data.dart';

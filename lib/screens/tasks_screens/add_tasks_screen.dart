@@ -1,9 +1,10 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/classes/tasks_class.dart';
+import 'package:to_do_app/data/tasks_class.dart';
 import 'package:to_do_app/components/calender_icon.dart';
 import 'package:to_do_app/constants/colors.dart';
 import 'package:to_do_app/models/tasks_data.dart';
@@ -21,6 +22,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   TimeOfDay time;
   final calender = Calender();
   Tasks task = Tasks();
+  final _firestore = FirebaseFirestore.instance;
 
   @override
   void dispose() {
@@ -339,6 +341,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   Widget addTask() {
     return ElevatedButton(
       onPressed: () {
+        print('$task');
+        _firestore.collection('tasks').add({
+          'taskName': task.taskName,
+          'taskDate': task.taskDate.toString(),
+          'taskTime': task.taskTime.toString(),
+          'taskReminder': task.taskReminder,
+          'markAsDone': task.markedAsDone
+        });
         return successDialog();
       },
       child: Text(

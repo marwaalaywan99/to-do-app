@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +8,9 @@ import 'package:to_do_app/screens/home_screen.dart';
 import 'package:to_do_app/screens/tasks_screens/add_tasks_screen.dart';
 import 'package:to_do_app/screens/tasks_screens/tasks_landing.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(ChangeNotifierProvider(
     create: (context) => TasksModel(),
     child: MaterialApp(
