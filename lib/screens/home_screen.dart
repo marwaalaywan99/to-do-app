@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:to_do_app/components/custom_dialog.dart';
 import 'package:to_do_app/constants/colors.dart';
+import 'package:to_do_app/data/tasks_class.dart';
 import 'package:to_do_app/screens/tasks_screens/tasks_landing.dart';
 import 'package:to_do_app/widgets/tasks_list.dart';
 
@@ -15,6 +16,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var _currentIndex = 0;
+  Tasks task;
 
   @override
   Widget build(BuildContext context) {

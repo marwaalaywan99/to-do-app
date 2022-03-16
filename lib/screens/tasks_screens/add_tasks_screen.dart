@@ -22,7 +22,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   TimeOfDay time;
   final calender = Calender();
   Tasks task = Tasks();
-  final _firestore = FirebaseFirestore.instance;
 
   @override
   void dispose() {
@@ -342,13 +341,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     return ElevatedButton(
       onPressed: () {
         print('$task');
-        _firestore.collection('tasks').add({
-          'taskName': task.taskName,
-          'taskDate': task.taskDate.toString(),
-          'taskTime': task.taskTime.toString(),
-          'taskReminder': task.taskReminder,
-          'markAsDone': task.markedAsDone
-        });
+        Provider.of<TasksModel>(context, listen:false).addTask(task, context);
+        Provider.of<TasksModel>(context, listen:false).fetchAllTasks();
         return successDialog();
       },
       child: Text(
@@ -381,7 +375,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             actions: [
               ElevatedButton(
                   onPressed: () {
-                    Provider.of<TasksModel>(context, listen:false).addTask(task);
+
                     Navigator.pop(context);
                     Navigator.pushNamed(context, '/tasks screen');
                   },

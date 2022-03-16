@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Tasks{
@@ -8,6 +11,8 @@ class Tasks{
   bool taskReminder;
   bool markedAsDone;
 
+
+  QuerySnapshot querySnapshot;
 
 
   Tasks({this.taskName, this.taskDate, this.taskTime, this.taskReminder, this.markedAsDone = false});
@@ -32,7 +37,6 @@ class Tasks{
     'taskReminder': taskReminder,
     'markedAsDone': markedAsDone,
   };
-
 
 }
 
