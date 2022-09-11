@@ -2,12 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:date_time_format/date_time_format.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:to_do_app/components/custom_dialog.dart';
 import 'package:to_do_app/constants/colors.dart';
 import 'package:to_do_app/data/tasks_class.dart';
 import 'package:to_do_app/screens/tasks_screens/tasks_landing.dart';
 import 'package:to_do_app/widgets/tasks_list.dart';
+
+import '../models/tasks_data.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -134,6 +137,7 @@ class _MyAppState extends State<MyApp> {
                         ),
                       ),
                       TextButton(onPressed: (){
+                        //Provider.of<TasksModel>(context, listen:false).deleteAllTasks();
                         Navigator.pushNamed(context, '/tasks screen');
                       }, child: Text('View all', style: TextStyle(color: kPurpleShade1),)),
                     ],

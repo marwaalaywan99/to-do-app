@@ -29,6 +29,10 @@ class TasksModel extends ChangeNotifier{
     return _tasks.length;
   }
 
+  void clearList(){
+    _tasks.length = 0;
+    notifyListeners();
+  }
 
   void addTask(Tasks task, BuildContext context){
     // final now = new DateTime.now();
@@ -57,19 +61,16 @@ class TasksModel extends ChangeNotifier{
   }
 
   void fetchAllTasks() async {
-    _tasks.clear();
-    notifyListeners();
+    clearList();
     await for (var snap in _firestore.collection('tasks').snapshots()){
       for(var message in snap.docs){
         print(message.data());
         _tasks.add(fixTasksFields(message.data()));
-        for( var i in message.data().entries){
-          print('${i.key} + ${i.value}');
-        }
       }
     }
     print('_tasks $_tasks');
     notifyListeners();
+    print('NOTIFIEEDDD');
   }
 
   Tasks fixTasksFields(Map<String, dynamic> map){
@@ -82,6 +83,14 @@ class TasksModel extends ChangeNotifier{
     task.markedAsDone = map['markedAsDone'];
     print('TASSSKKK $task');
     return task;
+  }
+
+  Future<void> deleteAllTasks() async {
+    var collection = FirebaseFirestore.instance.collection('tasks');
+    var snapshots = await collection.get();
+    for (var doc in snapshots.docs) {
+      await doc.reference.delete();
+    }
   }
 
   void deleteTask(Tasks task){

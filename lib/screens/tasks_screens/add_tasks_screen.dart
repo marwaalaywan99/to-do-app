@@ -342,6 +342,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       onPressed: () {
         print('$task');
         Provider.of<TasksModel>(context, listen:false).addTask(task, context);
+        Provider.of<TasksModel>(context, listen:false).clearList();
+        print('Length of tasks ${Provider.of<TasksModel>(context, listen:false).taskCount}');
         Provider.of<TasksModel>(context, listen:false).fetchAllTasks();
         return successDialog();
       },
