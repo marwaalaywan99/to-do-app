@@ -11,17 +11,17 @@ import 'package:to_do_app/models/tasks_data.dart';
 class EditTaskScreen extends StatefulWidget {
   final Tasks task;
 
-  const EditTaskScreen({Key key, @required this.task}) : super(key: key);
+  const EditTaskScreen({Key? key, required this.task}) : super(key: key);
   @override
   _EditTaskScreenState createState() => _EditTaskScreenState();
 }
 
 class _EditTaskScreenState extends State<EditTaskScreen> {
   final myController = TextEditingController();
-  String taskName;
+  late String taskName;
   bool isSwitched = false;
-  DateTime date;
-  TimeOfDay time;
+  late DateTime date;
+  late TimeOfDay time;
   final calender = Calender();
   Tasks newTask = Tasks();
   
@@ -34,7 +34,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
   }
 
   showDatePicker1(context) async {
-    DateTime datetime = await showRoundedDatePicker(
+    DateTime? datetime = await showRoundedDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(DateTime
@@ -54,7 +54,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
 
   showTimePicker1(context) async {
     TimeOfDay currentTime = TimeOfDay.now();
-    TimeOfDay time1 = await showTimePicker(
+    TimeOfDay? time1 = await showTimePicker(
       context: context,
       initialTime: currentTime,
       initialEntryMode: TimePickerEntryMode.input,
@@ -230,16 +230,16 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
           new Spacer(),
           Text(
               newTask.taskDate == null
-                  ? widget.task.taskDate.day.toString() +
+                  ? widget.task.taskDate!.day.toString() +
                     '/' +
-                    widget.task.taskDate.month.toString() +
+                    widget.task.taskDate!.month.toString() +
                     '/' +
-                    widget.task.taskDate.year.toString()
-                  : newTask.taskDate.day.toString() +
+                    widget.task.taskDate!.year.toString()
+                  : newTask.taskDate!.day.toString() +
                     '/' +
-                    newTask.taskDate.month.toString() +
+                    newTask.taskDate!.month.toString() +
                     '/' +
-                    newTask.taskDate.year.toString(),
+                    newTask.taskDate!.year.toString(),
               style: TextStyle(fontSize: 20, color: Colors.black54)),
         ],
       ),
@@ -287,8 +287,8 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
               )),
           new Spacer(),
           Text(newTask.taskTime == null
-              ? widget.task.taskTime.format(context)
-              : newTask.taskTime.format(context),
+              ? widget.task.taskTime!.format(context)
+              : newTask.taskTime!.format(context),
               style: TextStyle(fontSize: 20, color: Colors.black54))
         ],
       ),
@@ -332,7 +332,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
             )),
         new Spacer(),
         Switch(
-          value: widget.task.taskReminder,
+          value: widget.task.taskReminder ?? false,
           onChanged: (value) {
             setState(() {
               isSwitched = value;
@@ -367,8 +367,8 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
     );
   }
 
-  Future<void> successDialog() {
-    return showDialog<void>(
+  void successDialog() {
+    showDialog(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {

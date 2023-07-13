@@ -86,8 +86,8 @@ class _TasksScreenState extends State<TasksScreen> {
     );
   }
 
-  Future<DateTime> showDatePicker1(BuildContext  context) async{
-    final DateTime date = await showRoundedDatePicker(
+  Future<DateTime?> showDatePicker1(BuildContext  context) async{
+    final DateTime? date = await showRoundedDatePicker(
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(DateTime.now().year - 1),

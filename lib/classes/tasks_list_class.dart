@@ -24,6 +24,7 @@ class TasksListt{
     for(int i = 0; i < tasksList.length; i++){
       print('Task ${i+1}: ${tasksList[i]}');
     }
+    throw Exception('Error message');
 
   }
 }

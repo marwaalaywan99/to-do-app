@@ -19,7 +19,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var _currentIndex = 0;
-  Tasks task;
+  late Tasks task;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
 //                      ),
                     GestureDetector(
                       onTap: () {
-                        return showDialog(
+                        showDialog(
                             context: context,
                             builder: (BuildContext context) {
                               return CustomDialog(
@@ -150,6 +150,7 @@ class _MyAppState extends State<MyApp> {
         )),
     );
   }
+
 
   String currentDate() {
     final date = DateTime.now();

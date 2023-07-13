@@ -6,16 +6,16 @@ import 'package:flutter/material.dart';
 class Tasks{
 
   String taskName;
-  DateTime taskDate;
-  TimeOfDay taskTime;
-  bool taskReminder;
+  DateTime? taskDate;
+  TimeOfDay? taskTime;
+  bool? taskReminder;
   bool markedAsDone;
 
 
-  QuerySnapshot querySnapshot;
+  //QuerySnapshot querySnapshot;
 
 
-  Tasks({this.taskName, this.taskDate, this.taskTime, this.taskReminder, this.markedAsDone = false});
+  Tasks({this.taskName = "", this.taskDate, this.taskTime, this.taskReminder, this.markedAsDone = false});
 
   @override
   String toString(){

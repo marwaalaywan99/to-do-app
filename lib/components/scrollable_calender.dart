@@ -5,8 +5,8 @@ import 'package:to_do_app/constants/colors.dart';
 import 'package:to_do_app/models/tasks_data.dart';
 
 class ScrollableCalender extends StatefulWidget {
-  DateTime selectedDate = DateTime.now();
-  bool calDateSelected = false;
+  DateTime? selectedDate = DateTime.now();
+  bool? calDateSelected = false;
 
   ScrollableCalender({this.selectedDate, this.calDateSelected});
 
@@ -37,7 +37,7 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
 
   @override
   Widget build(BuildContext context) {
-    String date = DateTimeFormat.format(widget.selectedDate,
+    String date = DateTimeFormat.format(widget.selectedDate ?? DateTime.now(),
         format: AmericanDateFormats.dayOfWeek);
     return Column(
       children: [
@@ -81,7 +81,7 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
                           .month}');
                     });
                     Provider.of<TasksModel>(context, listen: false)
-                        .changeDate(widget.selectedDate, false, context);
+                        .changeDate(widget.selectedDate ?? DateTime.now(), false, context);
                   },
                   child: Container(
                     height: 80,
@@ -89,7 +89,7 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        color: calDateSelectedCardColor(widget.calDateSelected, index)),
+                        color: calDateSelectedCardColor(widget.calDateSelected ?? false, index)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -101,7 +101,7 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
                               .toString(),
                           style: TextStyle(
                               fontSize: 16,
-                              color: calDateSelectedTextColor(widget.calDateSelected, index)),
+                              color: calDateSelectedTextColor(widget.calDateSelected ?? false, index)),
                         ),
                         SizedBox(
                           height: 5,
@@ -114,7 +114,7 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
                           style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w700,
-                              color: calDateSelectedTextColor(widget.calDateSelected, index)),
+                              color: calDateSelectedTextColor(widget.calDateSelected ?? false, index)),
                         ),
                         SizedBox(
                           height: 5,
@@ -127,7 +127,7 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
                               .toString(),
                           style: TextStyle(
                               fontSize: 16,
-                              color: calDateSelectedTextColor(widget.calDateSelected, index)),
+                              color: calDateSelectedTextColor(widget.calDateSelected ?? false, index)),
                         ),
                       ],
                     ),
@@ -141,11 +141,11 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
 
   Color calDateSelectedCardColor(bool calDate, int index){
     if(calDate) {
-      if ((widget.selectedDate.month == DateTime
+      if ((widget.selectedDate?.month == DateTime
           .now()
           .add(Duration(days: index))
           .month)
-          && (widget.selectedDate.day == DateTime
+          && (widget.selectedDate?.day == DateTime
               .now()
               .add(Duration(days: index))
               .day )) {
@@ -163,11 +163,11 @@ class _ScrollableContainerState extends State<ScrollableCalender> {
 
   Color calDateSelectedTextColor(bool calDate, int index){
     if(calDate) {
-      if ((widget.selectedDate.month == DateTime
+      if ((widget.selectedDate?.month == DateTime
           .now()
           .add(Duration(days: index))
           .month)
-          && (widget.selectedDate.day == DateTime
+          && (widget.selectedDate?.day == DateTime
               .now()
               .add(Duration(days: index))
               .day )) {

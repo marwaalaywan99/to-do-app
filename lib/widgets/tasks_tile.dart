@@ -1,4 +1,6 @@
-import 'package:flutter/cupertino.dart';
+
+
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/data/tasks_class.dart';
@@ -21,11 +23,11 @@ class TaskTile extends StatelessWidget{
         title: Text(task.taskName,
           style: TextStyle(
             color: kTaskTitleColor,
-              decoration: task.markedAsDone ? TextDecoration.lineThrough : null),),
+              decoration: (task.markedAsDone != null) ? (task.markedAsDone ? TextDecoration.lineThrough : null) : null),),
         trailing: IconButton(
             icon: Icon(Icons.more_vert),
             onPressed: (){
-              return showDialog(
+              showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return CustomDialog(

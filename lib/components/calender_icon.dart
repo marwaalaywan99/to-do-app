@@ -5,8 +5,8 @@ import 'package:to_do_app/constants/colors.dart';
 import 'package:to_do_app/models/tasks_data.dart';
 
 class Calender extends StatelessWidget{
-  DateTime selectedDate;
-  TimeOfDay selectedTime;
+  DateTime? selectedDate;
+  TimeOfDay? selectedTime;
 
   Calender({this.selectedDate, this.selectedTime});
 
@@ -19,11 +19,11 @@ class Calender extends StatelessWidget{
     selectedTime = time;
   }
 
-  DateTime getDate(){
+  DateTime? getDate(){
     return selectedDate;
   }
 
-  TimeOfDay getTime(){
+  TimeOfDay? getTime(){
     return selectedTime;
   }
 
@@ -64,12 +64,12 @@ class Calender extends StatelessWidget{
 
 showTimePicker1(context) async{
   TimeOfDay currentTime = TimeOfDay.now();
-  TimeOfDay time = await showTimePicker(
+  TimeOfDay? time = await showTimePicker(
     context: context,
     initialTime: currentTime,
     initialEntryMode: TimePickerEntryMode.input,
   );
-  setTime(time);
+  setTime(time!);
   print(time);
 }
 

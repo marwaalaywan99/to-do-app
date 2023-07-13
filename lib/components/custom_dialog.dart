@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CustomDialog extends StatelessWidget{
 
-  final Widget listItems;
+  final Widget? listItems;
 
   CustomDialog({this.listItems});
 

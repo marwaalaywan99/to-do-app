@@ -19,7 +19,7 @@ class TasksModel extends ChangeNotifier{
    ];
 
   Calender cal = Calender();
-  DateTime date;
+  DateTime? date;
   bool calDateSelected = false;
 
   UnmodifiableListView<Tasks> get tasks => UnmodifiableListView(_tasks);
@@ -39,15 +39,15 @@ class TasksModel extends ChangeNotifier{
     // final dt = DateTime(task.taskTime.hour, task.taskTime.minute);
     // final format = DateFormat.jm();  //"6:00 AM"
     // String time = format.format(dt);
-    final t = task.taskTime.format(context);
+    final t = task.taskTime?.format(context);
     print(t);
-    final time1 = t.split(":");
+    final time1 = t?.split(":");
     print(time1);
-    final time3 = time1[0];
+    final time3 = time1?[0];
     print(time3);
-    final time2 = time1[1].split(" ");
+    final time2 = time1?[1].split(" ");
     print(time2);
-    final time = time3 + ':' + time2[0];
+    final time = time3! + ':' + time2![0];
     print(time);
     _firestore.collection('tasks').add({
       'taskName': task.taskName,

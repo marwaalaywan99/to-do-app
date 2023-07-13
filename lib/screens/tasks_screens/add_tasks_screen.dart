@@ -16,10 +16,10 @@ class AddTaskScreen extends StatefulWidget {
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
   final myController = TextEditingController();
-  String taskName;
+  late String taskName;
   bool isSwitched = false;
-  DateTime date;
-  TimeOfDay time;
+  late DateTime date;
+  late TimeOfDay time;
   final calender = Calender();
   Tasks task = Tasks();
 
@@ -31,7 +31,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   }
 
   showDatePicker1(context) async {
-    DateTime datetime = await showRoundedDatePicker(
+    DateTime? datetime = await showRoundedDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(DateTime
@@ -51,7 +51,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   showTimePicker1(context) async {
     TimeOfDay currentTime = TimeOfDay.now();
-    TimeOfDay time1 = await showTimePicker(
+    TimeOfDay? time1 = await showTimePicker(
       context: context,
       initialTime: currentTime,
       initialEntryMode: TimePickerEntryMode.input,
@@ -227,11 +227,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           Text(
               task.taskDate == null
                   ? ''
-                  : task.taskDate.day.toString() +
+                  : task.taskDate!.day.toString() +
                   '/' +
-                  task.taskDate.month.toString() +
+                  task.taskDate!.month.toString() +
                   '/' +
-                  task.taskDate.year.toString(),
+                  task.taskDate!.year.toString(),
               style: TextStyle(fontSize: 20, color: Colors.black54)),
         ],
       ),
@@ -278,7 +278,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 color: Colors.black,
               )),
           new Spacer(),
-          Text(task.taskTime == null ? '' : task.taskTime.format(context),
+          Text(task.taskTime == null ? '' : task.taskTime!.format(context),
               style: TextStyle(fontSize: 20, color: Colors.black54))
         ],
       ),
@@ -362,8 +362,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     );
   }
 
-  Future<void> successDialog() {
-    return showDialog<void>(
+  void successDialog() {
+    showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
