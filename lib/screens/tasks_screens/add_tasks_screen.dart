@@ -16,10 +16,10 @@ class AddTaskScreen extends StatefulWidget {
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
   final myController = TextEditingController();
-  late String taskName;
+  String? taskName;
   bool isSwitched = false;
-  late DateTime date;
-  late TimeOfDay time;
+  DateTime? date;
+  TimeOfDay? time;
   final calender = Calender();
   Tasks task = Tasks();
 

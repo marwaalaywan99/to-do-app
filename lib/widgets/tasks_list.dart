@@ -14,48 +14,44 @@ class TasksList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<TasksModel>(
       builder: (context, taskData, child) {
-        return Stack(children: <Widget>[
-          Visibility(
-            visible: taskData.taskCount == 0,
-            child: Center(
-              child: Text(
-                'No tasks added yet',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: kGrey
+        return Stack(
+          children: [
+          ListView.builder(
+              itemBuilder: (context, index) {
+                DateTime? now;
+                Color colorTask = colors[index % 3];
+                if (taskData.date == null && date == null) {
+                  now = DateTime.now();
+                } else if (taskData.date == null) {
+                  now = date!;
+                } else if (date == null) {
+                  now = taskData.date;
+                } else {
+                  now = DateTime.now();
+                }
+                final time = taskData.tasks[index].taskDate;
+                if (now?.year == time?.year &&
+                    now?.month == time?.month &&
+                    now?.day == time?.day) {
+                  final task = taskData.tasks[index];
+                  return TaskTile(task, colorTask);
+                } else {
+                  return SizedBox(
+                    height: 0,
+                  );
+                }
+              },
+              itemCount: taskData.taskCount,
+            ),
+            if (taskData.taskCount == 0 && DateTime.now().isAfter((taskData.date != null) as DateTime) && DateTime.now().isBefore((taskData.date != null) as DateTime))
+              Center(
+                child: Text(
+                  'No tasks added yet',
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
-            ),
-          ),
-          ListView.builder(
-            itemBuilder: (context, index) {
-              DateTime? now;
-              Color colorTask = colors[index % 3];
-              if (taskData.date == null && date == null) {
-                now = DateTime.now();
-              } else if (taskData.date == null) {
-                now = date!;
-              } else if (date == null) {
-                now = taskData.date;
-              } else {
-                now = DateTime.now();
-              }
-              final time = taskData.tasks[index].taskDate;
-              if (now?.year == time?.year &&
-                  now?.month == time?.month &&
-                  now?.day == time?.day) {
-                final task = taskData.tasks[index];
-                return TaskTile(task, colorTask);
-              } else {
-                return SizedBox(
-                  height: 0,
-                );
-              }
-            },
-            itemCount: taskData.taskCount,
-          )
-        ]);
+          ],
+        );
       },
     );
   }
